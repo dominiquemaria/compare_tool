@@ -227,6 +227,10 @@ def plot_figure(data, layout):
 
     fig = go.Figure(data=data, layout=layout)
     # fig.show()
+    fig.update_layout(
+        autosize=True,
+        width=1000,
+        height=1000)
     return fig
 
 
