@@ -364,6 +364,10 @@ def create_dataset(geoJSON, variable_x: list, variable_y: list, inverse_option_x
 def plot_figure(data, layout):
 
     fig = go.Figure(data=data, layout=layout)
+    fig.update_layout(
+        autosize=True,
+        width=1000,
+        height=1000)
     # fig.show()
     return fig
 
@@ -450,7 +454,7 @@ if __name__ == "__main__":
         inverse_option_y = True
 
     fig = generate_map(aggregation=aggregation, variable_x=indicator1, variable_y=indicator2)
-    body.plotly_chart(fig, use_container_width=True)
+    body.plotly_chart(fig, use_container_width=False)
 
     # try:
     #     fig = generate_map(aggregation=aggregation, variable_x=indicator1, variable_y=indicator2)
