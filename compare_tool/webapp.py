@@ -376,16 +376,16 @@ def plot_figure(data, layout):
 @st.cache
 def initialize():
     ## hoeft maar 1x vooraf ,  kan ook in preprocess-Data
-    dataset_gemeente, dataset_provincie = preprocess_data.get_data()
+    dataset_gemeente, dataset_provincie = get_data()
 
-    geometries_gemeentes, geometries_provincie = preprocess_data.get_cbs_polygons()
-    df_gemeente = preprocess_data.merge_data_with_polygons(geometries=geometries_gemeentes, dataframe=dataset_gemeente, merge_col=['REGIO_NAAM', 'REGIO_CODE'])
+    geometries_gemeentes, geometries_provincie = get_cbs_polygons()
+    df_gemeente = merge_data_with_polygons(geometries=geometries_gemeentes, dataframe=dataset_gemeente, merge_col=['REGIO_NAAM', 'REGIO_CODE'])
     df_gemeente.to_csv('data/datafile_gemeente.csv', index=False)
-    df_provincie = preprocess_data.merge_data_with_polygons(geometries=geometries_provincie, dataframe=dataset_provincie, merge_col=['REGIO_NAAM', 'REGIO_CODE'])
+    df_provincie = merge_data_with_polygons(geometries=geometries_provincie, dataframe=dataset_provincie, merge_col=['REGIO_NAAM', 'REGIO_CODE'])
     df_provincie.to_csv('data/datafile_provincie.csv', index=False)
 
-    j_file_gemeente = preprocess_data.create_geojson(data_and_geometries=df_gemeente, filepath=r"data/geojson_gemeente.json")
-    j_file_provincie = preprocess_data.create_geojson(data_and_geometries=df_provincie, filepath=r"data/geojson_provincie.json")
+    j_file_gemeente = create_geojson(data_and_geometries=df_gemeente, filepath=r"data/geojson_gemeente.json")
+    j_file_provincie = create_geojson(data_and_geometries=df_provincie, filepath=r"data/geojson_provincie.json")
 
 
 def read_geojson_from_disk(filepath, id="REGIO_NAAM"):
@@ -408,8 +408,8 @@ def generate_map(aggregation, variable_x, variable_y):
     variable_x = (df[variable_x])
     variable_y = (df[variable_y])
 
-    data, layout = bivariate_map.create_dataset(geoJSON=j_file, variable_x=variable_x, variable_y=variable_y, inverse_option_x=inverse_option_x, inverse_option_y=inverse_option_y)
-    fig = bivariate_map.plot_figure(data, layout)
+    data, layout = create_dataset(geoJSON=j_file, variable_x=variable_x, variable_y=variable_y, inverse_option_x=inverse_option_x, inverse_option_y=inverse_option_y)
+    fig = plot_figure(data, layout)
 
     return fig
 
