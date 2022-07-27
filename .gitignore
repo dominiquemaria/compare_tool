@@ -1,0 +1,8 @@
+venv/
+.ipynb_checkpoints/
+data/indicatoren/.DS_Store
+data/.DS_Store
+__pycache__/
+.idea/
+.DS_Store
+data/data.gsheet
