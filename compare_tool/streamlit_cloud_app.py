@@ -105,7 +105,7 @@ def get_cbs_polygons():
     gemeentegrenzen = gpd.read_file(geodata_url)
     gemeentegrenzen = gemeentegrenzen.rename(columns={'statcode': 'REGIO_CODE', 'statnaam': 'REGIO_NAAM'})
 
-    geodata_url_ggd = geodata_url="https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/wfs?request=GetFeature&service=WFS&version=1.1.0&outputFormat=application%2Fjson&typeName=cbsgebiedsindelingen:cbs_provincie_2020_gegeneraliseerd"
+    geodata_url_ggd ="https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/wfs?request=GetFeature&service=WFS&version=1.1.0&outputFormat=application%2Fjson&typeName=cbsgebiedsindelingen:cbs_provincie_2020_gegeneraliseerd"
     provinciegrenzen = gpd.read_file(geodata_url_ggd)
     provinciegrenzen = provinciegrenzen.rename(columns={'statcode': 'REGIO_CODE', 'statnaam': 'REGIO_NAAM'})
     return gemeentegrenzen, provinciegrenzen
@@ -433,6 +433,21 @@ if __name__ == "__main__":
     indicator1 = st.sidebar.selectbox('Kies eerste indicator', options_indicatoren)
     options_indicatoren=set(options_indicatoren)-set([indicator1])
     indicator2 = st.sidebar.selectbox('Kies tweede indicator', options_indicatoren)
+
+    toelichtingen = {
+        'Ervaren gezondheid (Goed / zeer goed, %)':'Bron: RIVM statline, 2020',
+        'Instroomleeftijd wlz (mediaan)':'De data voor deze indicator komt van CBS Statline (2020, met regio-indeling 2019). '
+                                         'De mediaan is benaderd vanwege de gehanteerde indeling in leeftijdscategorien van 5 jaar door CBS.',
+        'Aantal huisartsen FTEs per 1000 inwoners':'De data voor deze indicator komt van CBS Statline (AZW) en betreft kwartaal 1 2020.'
+                                                   'Het arbeidsvolume omvat huisartsen en gezondheidscentra. De data is dus '
+                                                   'geen zuivere weerspiegeling van het aantal huisarts FTEs, maar geeft'
+                                                   'een indicatie op basis van de best beschikbare openbare benadering.',
+        "Aantal 65+'ers":'Bron: CBS Statline, 2020'
+    }
+
+    st.sidebar.write("**Toelichting indicatoren**")
+    st.sidebar.write(f'**{indicator1}**: {toelichtingen[indicator1]}')
+    st.sidebar.write(f'**{indicator2}**: {toelichtingen[indicator2]}')
 
     body = st.text('Loading...')
 

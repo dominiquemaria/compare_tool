@@ -72,6 +72,21 @@ if __name__ == "__main__":
     options_indicatoren=set(options_indicatoren)-set([indicator1])
     indicator2 = st.sidebar.selectbox('Kies tweede indicator', options_indicatoren)
 
+    toelichtingen = {
+        'Ervaren gezondheid (Goed / zeer goed, %)':'Bron: RIVM statline, 2020',
+        'Instroomleeftijd wlz (mediaan)':'De data voor deze indicator komt van CBS Statline (2020, met regio-indeling 2019). '
+                                         'De mediaan is benaderd vanwege de gehanteerde indeling in leeftijdscategorien van 5 jaar door CBS.',
+        'Aantal huisartsen FTEs per 1000 inwoners':'De data voor deze indicator komt van CBS Statline (AZW) en betreft kwartaal 1 2020.'
+                                                   'Het arbeidsvolume omvat huisartsen en gezondheidscentra. De data is dus '
+                                                   'geen zuivere weerspiegeling van het aantal huisarts FTEs, maar geeft'
+                                                   'een indicatie op basis van de best beschikbare openbare benadering.',
+        "Aantal 65+'ers":'Bron: CBS Statline, 2020'
+    }
+
+    st.sidebar.write("**Toelichting indicatoren**")
+    st.sidebar.write(f'**{indicator1}**: {toelichtingen[indicator1]}')
+    st.sidebar.write(f'**{indicator2}**: {toelichtingen[indicator2]}')
+
     body = st.text('Loading...')
 
     inverse_option_x = False

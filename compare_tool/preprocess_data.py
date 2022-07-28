@@ -101,7 +101,7 @@ def get_cbs_polygons():
     gemeentegrenzen = gpd.read_file(geodata_url)
     gemeentegrenzen = gemeentegrenzen.rename(columns={'statcode': 'REGIO_CODE', 'statnaam': 'REGIO_NAAM'})
 
-    geodata_url_ggd = geodata_url="https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/wfs?request=GetFeature&service=WFS&version=1.1.0&outputFormat=application%2Fjson&typeName=cbsgebiedsindelingen:cbs_provincie_2020_gegeneraliseerd"
+    geodata_url_ggd ="https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/wfs?request=GetFeature&service=WFS&version=1.1.0&outputFormat=application%2Fjson&typeName=cbsgebiedsindelingen:cbs_provincie_2020_gegeneraliseerd"
     provinciegrenzen = gpd.read_file(geodata_url_ggd)
     provinciegrenzen = provinciegrenzen.rename(columns={'statcode': 'REGIO_CODE', 'statnaam': 'REGIO_NAAM'})
     return gemeentegrenzen, provinciegrenzen
